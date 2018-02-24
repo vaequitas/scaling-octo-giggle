@@ -11,6 +11,7 @@ Vagrant.configure("2") do |config|
     app.vm.box      = "centos/7"
     app.vm.provision :shell, path: "bootstrap.sh"
     app.vm.network :private_network, ip: "192.168.33.10"
+    app.vm.synced_folder "../app", "/var/sites/app"
   end
   # The most common configuration options are documented and commented below.
   # For a complete reference, please see the online documentation at
