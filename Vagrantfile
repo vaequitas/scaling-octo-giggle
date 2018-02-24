@@ -14,6 +14,14 @@ Vagrant.configure("2") do |config|
     app.vm.synced_folder "../app", "/var/sites/app"
   end
 
+  config.vm.define "app_2" do |app|
+    app.vm.hostname = "vag-app-02"
+    app.vm.box      = "centos/7"
+    app.vm.provision :shell, path: "bootstrap.sh"
+    app.vm.network :private_network, ip: "192.168.33.22"
+    app.vm.synced_folder "../app", "/var/sites/app"
+  end
+
   config.vm.define "web" do |web|
     web.vm.hostname = "vag-web-01"
     web.vm.box = "centos/7"
