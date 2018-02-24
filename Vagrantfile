@@ -8,6 +8,7 @@
 Vagrant.configure("2") do |config|
   config.vm.define "app" do |app|
     app.vm.box = "centos/7"
+    app.vm.provision :shell, path: "bootstrap.sh"
   end
   # The most common configuration options are documented and commented below.
   # For a complete reference, please see the online documentation at
