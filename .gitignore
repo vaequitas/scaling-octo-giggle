@@ -6,3 +6,20 @@
 
 # Log files (if you are creating logs in debug mode, uncomment this)
 # *.logs
+#### joe made this: http://goel.io/joe
+
+#### vim ####
+# Swap
+[._]*.s[a-v][a-z]
+[._]*.sw[a-p]
+[._]s[a-v][a-z]
+[._]sw[a-p]
+
+# Session
+Session.vim
+
+# Temporary
+.netrwhist
+*~
+# Auto-generated tag files
+tags
