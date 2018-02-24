@@ -5,28 +5,47 @@
 # configures the configuration version (we support older styles for
 # backwards compatibility). Please don't change it unless you know what
 # you're doing.
+servers = [
+  {
+    :hostname => 'vag-app-01',
+    :ip => '192.168.33.21',
+    :box => 'centos/7',
+    :synced_folders => [
+      {
+        :host => '../app',
+        :guest => '/var/sites/app',
+      },
+    ],
+  },
+  {
+    :hostname => 'vag-app-02',
+    :ip => '192.168.33.22',
+    :box => 'centos/7',
+    :synced_folders => [
+      {
+        :host => '../app',
+        :guest => '/var/sites/app',
+      },
+    ],
+  },
+  {
+    :hostname => 'vag-web-01',
+    :ip => '192.168.33.11',
+    :box => 'centos/7',
+  },
+]
 Vagrant.configure("2") do |config|
-  config.vm.define "app_1" do |app|
-    app.vm.hostname = "vag-app-01"
-    app.vm.box      = "centos/7"
-    app.vm.provision :shell, path: "bootstrap.sh"
-    app.vm.network :private_network, ip: "192.168.33.21"
-    app.vm.synced_folder "../app", "/var/sites/app"
-  end
+  config.vm.provision :shell, path: "bootstrap.sh"
 
-  config.vm.define "app_2" do |app|
-    app.vm.hostname = "vag-app-02"
-    app.vm.box      = "centos/7"
-    app.vm.provision :shell, path: "bootstrap.sh"
-    app.vm.network :private_network, ip: "192.168.33.22"
-    app.vm.synced_folder "../app", "/var/sites/app"
-  end
-
-  config.vm.define "web" do |web|
-    web.vm.hostname = "vag-web-01"
-    web.vm.box = "centos/7"
-    web.vm.provision :shell, path: "bootstrap.sh"
-    web.vm.network :private_network, ip: "192.168.33.11"
+  servers.each do |server|
+    config.vm.define server[:hostname] do |node|
+      node.vm.box = server[:box]
+      node.vm.hostname = server[:hostname]
+      node.vm.network :private_network, ip: server[:ip]
+      server[:synced_folders].each do |synced_folder|
+        node.vm.synced_folder synced_folder[:host], synced_folder[:guest]
+      end unless server[:synced_folders].nil?
+    end
   end
 
   # The most common configuration options are documented and commented below.
