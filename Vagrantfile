@@ -6,11 +6,11 @@
 # backwards compatibility). Please don't change it unless you know what
 # you're doing.
 Vagrant.configure("2") do |config|
-  config.vm.define "app" do |app|
+  config.vm.define "app_1" do |app|
     app.vm.hostname = "vag-app-01"
     app.vm.box      = "centos/7"
     app.vm.provision :shell, path: "bootstrap.sh"
-    app.vm.network :private_network, ip: "192.168.33.10"
+    app.vm.network :private_network, ip: "192.168.33.21"
     app.vm.synced_folder "../app", "/var/sites/app"
   end
 
