@@ -1,0 +1,8 @@
+#### joe made this: http://goel.io/joe
+
+#### vagrant ####
+# General
+.vagrant/
+
+# Log files (if you are creating logs in debug mode, uncomment this)
+# *.logs
