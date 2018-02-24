@@ -8,3 +8,7 @@ nginx::nginx_servers:
     'tflack.go.app':
         listen_port: 80
         proxy: 'http://go_app'
+selinux::boolean:
+    httpd_can_network_connect:
+        ensure: on
+        persistent: true
