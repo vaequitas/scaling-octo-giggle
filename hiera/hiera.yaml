@@ -1,0 +1,10 @@
+---
+version: 5
+:defaults:
+    :datadir: /vagrant/hiera/data
+    :data_hash: yaml_data
+:hierarchy:
+    - name: "Per-role data"
+      path: "%{::server_role}.yaml"
+    - name: "Common hierarchy level"
+      path: "common.yaml"
