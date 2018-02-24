@@ -1,0 +1,10 @@
+nginx::nginx_upstreams:
+    'go_app':
+        ensure: present
+        members:
+            - 192.168.33.21:8080
+            - 192.168.33.22:8080
+nginx::nginx_servers:
+    'tflack.go.app':
+        listen_port: 80
+        proxy: 'http://go_app'
