@@ -5,7 +5,7 @@ servers = [
   {
     :hostname => 'vag-app-01',
     :ip => '192.168.33.21',
-    :box => 'centos/7',
+    :box => 'geerlingguy/centos7',
     :synced_folders => [
       {
         :host => '../app',
@@ -24,7 +24,7 @@ servers = [
   {
     :hostname => 'vag-app-02',
     :ip => '192.168.33.22',
-    :box => 'centos/7',
+    :box => 'geerlingguy/centos7',
     :synced_folders => [
       {
         :host => '../app',
@@ -43,7 +43,7 @@ servers = [
   {
     :hostname => 'vag-web-01',
     :ip => '192.168.33.11',
-    :box => 'centos/7',
+    :box => 'geerlingguy/centos7',
     :provisioners => {
       :puppet => {
         :manifest_file => 'web.pp',
