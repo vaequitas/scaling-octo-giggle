@@ -1,8 +1,14 @@
 #!/usr/bin/env bash
+set -euo pipefail
+IFS=$'\n\t'
 
-yum install -y epel-release
-yum install -y net-tools
+if ! yum repolist | grep --quiet '^epel' ; then
+    yum install -y -q epel-release
+fi
 
-readonly PUPPET_YUM_REPO="https://yum.puppetlabs.com/puppet5/puppet5-release-el-7.noarch.rpm"
-rpm -ivh "${PUPPET_YUM_REPO}"
-yum install -y puppet
+if ! yum repolist | grep --quiet '^puppet' ; then
+    readonly PUPPET_YUM_REPO="https://yum.puppetlabs.com/puppet5/puppet5-release-el-7.noarch.rpm"
+    rpm -Uvh "${PUPPET_YUM_REPO}"
+fi
+
+yum install -y -q puppet
