@@ -69,10 +69,10 @@ Vagrant.configure("2") do |config|
       end unless server[:synced_folders].nil?
 
       node.vm.provision :puppet do |puppet|
-        puppet.manifests_path = "../puppet/manifests"
-        puppet.module_path    = ["../puppet/modules/custom", "../puppet/modules/forge"]
-        puppet.manifest_file = server[:provisioners][:puppet][:manifest_file]
-        puppet.facter        = server[:provisioners][:puppet][:facter]
+        puppet.manifests_path    = "../puppet/manifests"
+        puppet.module_path       = ["../puppet/modules/custom", "../puppet/modules/forge"]
+        puppet.manifest_file     = server[:provisioners][:puppet][:manifest_file]
+        puppet.facter            = server[:provisioners][:puppet][:facter]
         puppet.hiera_config_path = "hiera/hiera.yaml"
         puppet.working_directory = "/tmp/vagrant-puppet"
       end
