@@ -1,0 +1,7 @@
+supervisord::package_provider: 'yum'
+supervisord::install_init: false
+supervisord::programs:
+    'goapp':
+        command: 'go run /var/sites/app/src/main.go'
+        autostart: yes
+        autorestart: true
